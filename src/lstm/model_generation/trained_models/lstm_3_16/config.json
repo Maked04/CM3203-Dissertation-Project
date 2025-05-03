@@ -1,0 +1,94 @@
+{
+    "features_config": {
+        "trade_size_ratio": true,
+        "liquidity_ratio": true,
+        "relative_time": true,
+        "absolute_time": false,
+        "price_change": true,
+        "wallet_trade_size_deviation": true,
+        "volume_prior": false,
+        "trade_count_prior": false,
+        "rough_pnl": true,
+        "average_roi": true,
+        "win_rate": true,
+        "average_hold_duration": true
+    },
+    "time_bucket_folder": "time_bucket_1",
+    "test_size": 0.2,
+    "training_params": {
+        "optimizer": "adam",
+        "loss": "weighted_mse_large_moves",
+        "epochs": 100,
+        "batch_size": 16,
+        "validation_split": null,
+        "early_stopping": {
+            "monitor": "val_loss",
+            "patience": 5,
+            "min_delta": -0.001,
+            "mode": "min",
+            "restore_best_weights": true
+        }
+    },
+    "model_architecture": {
+        "layers": [
+            {
+                "name": "masking",
+                "type": "Masking"
+            },
+            {
+                "name": "bidirectional",
+                "type": "Bidirectional"
+            },
+            {
+                "name": "batch_normalization",
+                "type": "BatchNormalization"
+            },
+            {
+                "name": "dropout",
+                "type": "Dropout",
+                "rate": 0.3
+            },
+            {
+                "name": "bidirectional_1",
+                "type": "Bidirectional"
+            },
+            {
+                "name": "batch_normalization_1",
+                "type": "BatchNormalization"
+            },
+            {
+                "name": "dropout_1",
+                "type": "Dropout",
+                "rate": 0.3
+            },
+            {
+                "name": "dense",
+                "type": "Dense",
+                "units": 32,
+                "activation": "relu"
+            },
+            {
+                "name": "dense_1",
+                "type": "Dense",
+                "units": 1,
+                "activation": "linear"
+            }
+        ],
+        "total_params": 141889
+    },
+    "timestamp": "20250417_200334",
+    "input_shape": [
+        -1,
+        300,
+        9
+    ],
+    "X_train_shape": [
+        66836,
+        300,
+        9
+    ],
+    "y_train_shape": [
+        66836,
+        1
+    ]
+}
