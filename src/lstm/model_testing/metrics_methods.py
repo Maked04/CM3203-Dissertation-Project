@@ -3,7 +3,7 @@ from sklearn.metrics import confusion_matrix
 import pandas as pd
 
 
-def evaluate_large_move_model(y_true, y_pred, threshold=0.02,
+def evaluate_large_move_model(y_true, y_pred, threshold=0.5,
                                prediction_weight=0.4, freq_weight=0.3, error_weight=0.3, f1_weight=0.5):
     """
     Evaluates how well predictions capture large market moves.
@@ -11,7 +11,7 @@ def evaluate_large_move_model(y_true, y_pred, threshold=0.02,
     Parameters:
     - y_true: array-like of true returns
     - y_pred: array-like of predicted returns
-    - threshold: minimum % move considered 'large' (default 2%)
+    - threshold: minimum % move considered 'large' (default 50%)
     - *_weight: weights for combining submetrics into a final score
 
     Returns:
