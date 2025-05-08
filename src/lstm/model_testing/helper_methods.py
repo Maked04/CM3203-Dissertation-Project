@@ -76,7 +76,7 @@ def get_active_features(features_config: FeaturesConfig):
     return active_features
 
 
-def get_test_tokens_with_large_pred(token_datasets, test_size, y_pred_actual, min_abs_pred_size=1.5):
+def get_test_tokens_with_large_pred(token_datasets, test_size, y_pred_actual, min_pred_size=1.5):
     total_buckets = sum(len(data[1]) for data in token_datasets)
     test_start_idx = int((1 - test_size) * total_buckets)
 
@@ -97,7 +97,7 @@ def get_test_tokens_with_large_pred(token_datasets, test_size, y_pred_actual, mi
                 if y_pred_test_index >= len(y_pred_actual):
                     break  # Prevent overflow if mismatch in lengths
                 pred = y_pred_actual[y_pred_test_index].item()
-                if abs(pred) >= min_abs_pred_size:
+                if pred >= min_pred_size:
                     bucket_pred_map.append({
                         'bucket_time': tuple(bucket_times[i]),
                         'prediction': pred

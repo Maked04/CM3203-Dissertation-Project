@@ -84,7 +84,6 @@ def trim_main_trading_period_old(df, min_trades_per_hour=50, window_size_hours=1
     # Return only the data within the longest active block
     return df.loc[min(longest_block):max(longest_block)]
 
-import pandas as pd
 
 def trim_main_trading_period(df, min_trades_per_hour=50, window_size_hours=1):
     """
